@@ -6,7 +6,7 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:12:37 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/03/29 15:02:12 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:02:20 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_atoi(const char *str)
 int main(int ac , char **av)
 {
     int pid;
-	int i = 0;  
+	int i = 0;
 	
     if (ac != 3)
         return (write(2, "Error\n", 6) ,1);

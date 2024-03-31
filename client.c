@@ -6,7 +6,7 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:12:37 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/03/29 15:02:20 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/03/31 21:49:34 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,40 @@ int	ft_atoi(const char *str)
 		num = num * 10 + str[i++] - 48;
 	return (negat * num);
 }
-// int ft_bit(char *a)
-// {}
+void ft_bit(unsigned char c, int pid)
+{
+	int b;
+	int res;
+
+	b = 7;
+	res = 0;
+	while (b >= 0)
+	{
+		res = c >> b & 1;
+		if (res == 0)
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		usleep(300);
+		b--;
+	}
+	
+}
 int main(int ac , char **av)
 {
     int pid;
-	int i = 0;
+	int i;
 	
+	i = 0;
     if (ac != 3)
         return (write(2, "Error\n", 6) ,1);
     pid = ft_atoi(av[1]);
-   
-		i = 0;
-		while (av[2][i])
-		{ 
-			printf("%c", av[2][i]);
-			i++;
-		}
-	
+	while (av[2][i])
+	{ 
+		// printf("%c", av[2][i]);
+		ft_bit(av[2][i], pid);
+		i++;
+	}
+	return 0;
     // printf("%d",pid);
 }

@@ -6,7 +6,7 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 00:36:24 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/04/01 01:14:16 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:15:01 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int main(int ac, char **av)
     while (1) {
         sleep(1);
     }
+    https://www.phind.com/search?cache=u9awpp48dwbz9e9z6mdd3dca
     // return 0;
 }
 

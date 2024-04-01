@@ -6,7 +6,7 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 00:36:24 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/04/01 20:26:08 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/04/01 21:06:33 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,18 @@
 void ft_handler(int sig, siginfo_t *info, void *context) 
 {
     static char bit;
-    static int i;
+    static int i = 7;
 
-    i++;
-    if (sig == SIGUSR1)
-        printf("user1-->%d\n",  bit |= (0 << i));
     if (sig == SIGUSR2)
-        printf("user2-->%d\n", bit |= (1 << i));
+        bit |= (1 << i);
     
-    if (i == 8)
+    if (i == 0)
     {
-        printf("%d\n", bit);
-        i = 0;
+        write(1, &bit, 1);
+        i = 8;
         bit = 0;
     }
-
+    i--;
 }
 
 int main(int ac, char **av)

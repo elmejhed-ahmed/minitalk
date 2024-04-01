@@ -6,7 +6,7 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:12:37 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/03/31 21:49:34 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/04/01 20:48:10 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void ft_bit(unsigned char c, int pid)
 		usleep(300);
 		b--;
 	}
-	
 }
 int main(int ac , char **av)
 {
@@ -69,10 +68,8 @@ int main(int ac , char **av)
     pid = ft_atoi(av[1]);
 	while (av[2][i])
 	{ 
-		// printf("%c", av[2][i]);
 		ft_bit(av[2][i], pid);
 		i++;
 	}
 	return 0;
-    // printf("%d",pid);
 }

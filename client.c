@@ -6,7 +6,7 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:12:37 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/04/01 20:48:10 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/04/01 22:23:08 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int main(int ac , char **av)
 	int i;
 	
 	i = 0;
+	 printf("PID CLIENT: %d\n", getpid());
     if (ac != 3)
         return (write(2, "Error\n", 6) ,1);
     pid = ft_atoi(av[1]);

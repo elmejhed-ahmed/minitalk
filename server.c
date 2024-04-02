@@ -6,14 +6,11 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 00:36:24 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/04/02 00:55:04 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:57:24 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <signal.h>
-#include <stdlib.h>
+#include "minitalk.h"
 
 void ft_handler(int sig, siginfo_t *info, void *context) 
 {
@@ -21,6 +18,7 @@ void ft_handler(int sig, siginfo_t *info, void *context)
     static int i = 7;
     static int old_pid;
 
+    (void)context;
     if (old_pid == 0)
         old_pid = info->si_pid;
     else if (info->si_pid != old_pid)
@@ -65,7 +63,7 @@ static void    ft_putnbr_fd(int nb, int fd)
     }
 }
 
-static void    ft_putstr_fd(char *str, int fd)
+void    ft_putstr_fd(char *str, int fd)
 {
     int i;
     
@@ -80,17 +78,19 @@ static void    ft_putstr_fd(char *str, int fd)
 int main(int ac, char **av)
 {
     struct  sigaction sig;
+    
     sig.sa_sigaction = ft_handler;
     sig.sa_flags = SA_SIGINFO;
-
+    (void)av;
     if (ac != 1)
         return (write(2, "Error\n", 6), 1);
-    ft_putstr_fd("\033[0;33m" ,1); 
-    ft_putstr_fd("███████ ███████ ██████  ██    ██ ███████ ██████ \n", 1); 
-    ft_putstr_fd("██      ██      ██   ██ ██    ██ ██      ██   ██\n", 1); 
-    ft_putstr_fd("███████ █████   ██████  ██    ██ █████   ██████ \n", 1); 
-    ft_putstr_fd("     ██ ██      ██   ██  ██  ██  ██      ██   ██\n", 1); 
-    ft_putstr_fd("███████ ███████ ██   ██   ████   ███████ ██   ██\n", 1);
+    ft_putstr_fd("\033[0;33m" ,1);
+    ft_putstr_fd("███████╗███████╗██████╗ ██╗   ██╗███████╗██████╗ \n", 1); 
+    ft_putstr_fd("██╔════╝██╔════╝██╔══██╗██║   ██║██╔════╝██╔══██╗\n", 1); 
+    ft_putstr_fd("███████╗█████╗  ██████╔╝██║   ██║█████╗  ██████╔╝\n", 1); 
+    ft_putstr_fd("╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██╔══╝  ██╔══██╗\n", 1); 
+    ft_putstr_fd("███████║███████╗██║  ██║ ╚████╔╝ ███████╗██║  ██║\n", 1); 
+    ft_putstr_fd("╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝\n", 1); 
     ft_putstr_fd("\n------------------>PID :" ,1); 
     ft_putnbr_fd(getpid(), 1);
     ft_putstr_fd("<------------------\n" ,1);

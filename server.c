@@ -6,7 +6,7 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 00:36:24 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/04/01 23:33:17 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/04/02 00:55:04 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,41 @@ void ft_handler(int sig, siginfo_t *info, void *context)
     }
     i--;
 }
-static ft_putnbr(int nb, int fd)
+
+static void    ft_putnbr_fd(int nb, int fd)
 {
+    unsigned int n;
+    n = nb;
+    if (fd > 0)
+    {
+        if (n  < 0)
+        {
+            write(fd, "-", 1);
+            nb *= (-1);
+        }
+        if (nb > 9)
+        {
+           ft_putnbr_fd(nb / 10, fd);
+           ft_putnbr_fd(nb % 10, fd);
+        }
+        if(nb >= 0 && nb <= 9)
+        {
+            nb += 48;
+            write(fd, &nb, 1);
+        } 
+    }
+}
+
+static void    ft_putstr_fd(char *str, int fd)
+{
+    int i;
     
+    i = 0;
+    while (str[i])
+    {
+        write(fd, &str[i], 1);
+        i++;
+    }
 }
 
 int main(int ac, char **av)
@@ -53,8 +85,15 @@ int main(int ac, char **av)
 
     if (ac != 1)
         return (write(2, "Error\n", 6), 1);
-    printf("PID: %d\n", getpid());
-    
+    ft_putstr_fd("\033[0;33m" ,1); 
+    ft_putstr_fd("███████ ███████ ██████  ██    ██ ███████ ██████ \n", 1); 
+    ft_putstr_fd("██      ██      ██   ██ ██    ██ ██      ██   ██\n", 1); 
+    ft_putstr_fd("███████ █████   ██████  ██    ██ █████   ██████ \n", 1); 
+    ft_putstr_fd("     ██ ██      ██   ██  ██  ██  ██      ██   ██\n", 1); 
+    ft_putstr_fd("███████ ███████ ██   ██   ████   ███████ ██   ██\n", 1);
+    ft_putstr_fd("\n------------------>PID :" ,1); 
+    ft_putnbr_fd(getpid(), 1);
+    ft_putstr_fd("<------------------\n" ,1);
     if (sigaction(SIGUSR1, &sig, NULL) == -1)
         return 1;
     if (sigaction(SIGUSR2, &sig, NULL) == -1)

@@ -6,7 +6,7 @@
 #    By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/27 16:59:51 by ael-mejh          #+#    #+#              #
-#    Updated: 2024/04/02 15:48:40 by ael-mejh         ###   ########.fr        #
+#    Updated: 2024/04/02 16:16:10 by ael-mejh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,11 @@ NAMEC = client
 CC    = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC1 = server.c
-SRC2 = client.c
+SRC1 = server.c ft_putstr_fd.c
+SRC2 =  server.c ft_putstr_fd.c
 
-OBJ1 = server.o
-OBJ2 = client.o
+OBJ1 = $(SRC1:.c=.o)
+OBJ2 = $(SRC2:.c=.o)
 
 # Print header
 # printheder:
@@ -40,7 +40,7 @@ $(NAMES): $(OBJ1)
 $(NAMEC): $(OBJ2)
 	$(CC) $(CFLAGS) $^ -o $(NAMEC) 
 
-%.o: %.c 
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

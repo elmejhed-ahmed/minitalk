@@ -6,7 +6,7 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 00:36:24 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/04/02 15:57:24 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:14:23 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,7 @@ static void    ft_putnbr_fd(int nb, int fd)
     }
 }
 
-void    ft_putstr_fd(char *str, int fd)
-{
-    int i;
-    
-    i = 0;
-    while (str[i])
-    {
-        write(fd, &str[i], 1);
-        i++;
-    }
-}
+
 
 int main(int ac, char **av)
 {

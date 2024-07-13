@@ -6,7 +6,7 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:12:37 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/04/02 16:50:31 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/06/22 15:32:53 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@ int	ft_atoi(const char *str)
 		num = num * 10 + str[i++] - 48;
 	return (negat * num);
 }
-void ft_bit(unsigned char c, int pid)
+
+void	ft_bit(unsigned char c, int pid)
 {
-	int b;
-	int res;
+	int	b;
+	int	res;
 
 	b = 7;
 	res = 0;
@@ -48,26 +49,51 @@ void ft_bit(unsigned char c, int pid)
 	{
 		res = c >> b & 1;
 		if (res == 0)
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1) == -1)
+				exit(1);
+		}
 		else
-			kill(pid, SIGUSR2);
+		{
+			if (kill(pid, SIGUSR2) == -1)
+				exit(1);
+		}
 		usleep(300);
 		b--;
 	}
 }
-int main(int ac , char **av)
+
+int	ft_isdigit(int c)
 {
-    int pid;
-	int i;
-	
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
+}
+
+int	main(int ac, char **av)
+{
+	int	pid;
+	int	i;
+
 	i = 0;
-    if (ac != 3)
-        return (write(2, "Error\n", 6) ,1);
-    pid = ft_atoi(av[1]);
+	if (ac != 3)
+		return (write(2, "Error\n", 6), 1);
+	while (av[1][i])
+	{
+		if (!ft_isdigit(av[1][i]))
+			return (write(2, "Error\n", 6), 1);
+		i++;
+	}
+	pid = ft_atoi(av[1]);
+	if (pid <= 0 && pid < 2147483647)
+		return (write(2, "Error\n", 6), 1);
+	i = 0;
 	while (av[2][i])
-	{ 
+	{
 		ft_bit(av[2][i], pid);
 		i++;
 	}
-	return 0;
+	if (av[2][i] == '\0')
+		ft_bit(av[2][i], pid);
+	return (0);
 }

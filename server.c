@@ -6,11 +6,13 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 00:36:24 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/06/22 15:45:51 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/07/23 13:07:21 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+static int	g_i = 7;
 
 static void	ft_putnbr_fd(int nb, int fd)
 {
@@ -40,31 +42,28 @@ static void	ft_putnbr_fd(int nb, int fd)
 void	ft_handler(int sig, siginfo_t *info, void *context)
 {
 	static char	bit;
-	static int	i;
 	static int	old_pid;
 
-	i = 7;
 	(void)context;
 	if (old_pid == 0)
 		old_pid = info->si_pid;
 	else if (info->si_pid != old_pid)
 	{
 		old_pid = info->si_pid;
-		i = 7;
+		g_i = 7;
 		bit = 0;
 	}
 	if (sig == SIGUSR2)
-		bit |= (1 << i);
-	if (i == 0)
+		bit |= (1 << g_i);
+	if (g_i == 0)
 	{
-		if (bit == '\0')
+		write(1, &bit, 1);
+		if (!bit)
 			write(1, "\n", 1);
-		else
-			write(1, &bit, 1);
-		i = 8;
+		g_i = 8;
 		bit = 0;
 	}
-	i--;
+	g_i--;
 }
 
 int	main(int ac, char **av)

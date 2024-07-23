@@ -6,7 +6,7 @@
 #    By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/27 16:59:51 by ael-mejh          #+#    #+#              #
-#    Updated: 2024/06/11 15:57:10 by ael-mejh         ###   ########.fr        #
+#    Updated: 2024/07/22 11:06:57 by ael-mejh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,9 @@ $(NAMEC): $(OBJ2)
 
 clean:
 	rm -rf $(OBJ1) $(OBJ2)
+
 fclean: clean
 	rm -rf $(NAMEC) $(NAMES)
+
+re: fclean all
 .PHONY: all clean printheder
